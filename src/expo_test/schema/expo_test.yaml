@@ -3,7 +3,8 @@ id: https://w3id.org/sierra-moxon/expo-test
 name: expo-test
 title: expo-test
 description: |-
-  This is the project description.
+  A tiny LinkML schema for aligning exposure data around three parts:
+  stimulus, receiver, and outcome.
 license: MIT
 see_also:
   - https://sierra-moxon.github.io/expo-test
@@ -13,7 +14,11 @@ prefixes:
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
+  ExO: http://purl.obolibrary.org/obo/ExO_
+  XCO: http://purl.obolibrary.org/obo/XCO_
+  CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  NCBITaxon: http://purl.obolibrary.org/obo/NCBITaxon_
+  ZP: http://purl.obolibrary.org/obo/ZP_
   example: https://example.org/
 default_prefix: expo_test
 default_range: string
@@ -32,26 +37,88 @@ classes:
       - description
     class_uri: schema:Thing
 
-  Person:
-    is_a: NamedThing
+  ExposureEvent:
+    abstract: true
     description: >-
-      Represents a Person
+      An event in which a BiologicalEntity is exposed
+      to a StimulusEntity and results in a BiologicalResponse
+    annotations:
+      must_not_have_id_slot: true
     slots:
-      - primary_email
-      - birth_date
-      - age_in_years
-      - vital_status
-    slot_usage:
-      primary_email:
-        pattern: "^\\S+@[\\S+\\.]+\\S+"
+      - exposure_stimulus
+      - exposure_outcome
+      - exposure_receiver
 
-  PersonCollection:
+  StimulusEntity:
+    is_a: NamedThing
+    abstract: true
+    description: >-
+      An entity that can act as a stimulus in an exposure event.
+      Examples: Chemical, Behavior, Diet, ManufacturedProduct,
+      EnvironmentalProcess.
+
+  BiologicalResponse:
+    is_a: NamedThing
+    abstract: true
+    description: >-
+      A biological outcome resulting from an exposure event.
+      Examples: Phenotype, Disease, AdverseOutcome,
+      MolecularInitiatingEvent, KeyEvent.
+
+  BiologicalEntity:
+    is_a: NamedThing
+    abstract: true
+    description: >-
+      A biological entity that can receive an exposure.
+      Examples: Gene, Protein, Cell, AnatomicalEntity,
+      Organism, Population.
+
+  Exposure:
+    abstract: true
+    implements:
+      - ExposureEvent
+    class_uri: ExO:0000002
+    description: >-
+      External, non-genetic, and internal stimuli, that can be
+      chemical, physical, biological, and psychosocial in nature,
+      that a BiologicalEntity interacts with.
+    slots:
+      - exposure_route
+      - exposure_duration
+      - exposure_frequency
+      - exposure_concentration
+      - exposure_medium
+
+  ExperimentalExposure:
+    is_a: Exposure
+    class_uri: XCO:0000000
+    description: >-
+      Exposure to a treatment in an empirical experimental setting.
+    slots:
+      - id
+      - treatment
+      - experimental_subject
+      - experimental_result
+      - exposure_route
+      - exposure_duration
+      - exposure_frequency
+      - exposure_concentration
+      - exposure_medium
+    slot_usage:
+      treatment:
+        instantiates: exposure_stimulus
+      experimental_subject:
+        instantiates: exposure_receiver
+      experimental_result:
+        instantiates: exposure_outcome
+
+  ExposureCollection:
     tree_root: true
     description: >-
-      A holder for Person objects
+      A holder for ExperimentalExposure objects.
     attributes:
-      people:
-        range: Person
+      exposures:
+        range: ExperimentalExposure
         multivalued: true
         inlined_as_list: true
 
@@ -67,30 +134,71 @@ slots:
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
-  primary_email:
-    slot_uri: schema:email
-    description: The main email address of a person
-  birth_date:
-    slot_uri: schema:birthDate
-    range: date
-    description: Date on which a person is born
-  age_in_years:
-    range: integer
-    description: Number of years since birth
-  vital_status:
-    range: PersonStatus
-    description: living or dead status
+
+  exposure_stimulus:
+    description: The stimulus entity involved in the exposure event.
+    range: StimulusEntity
+  exposure_outcome:
+    description: The biological response resulting from the exposure event.
+    range: BiologicalResponse
+  exposure_receiver:
+    description: The biological entity that receives the exposure.
+    range: BiologicalEntity
+
+  exposure_route:
+    description: The route by which the exposure occurs.
+    range: ExposureRouteEnum
+  exposure_duration:
+    description: The duration of the exposure.
+    range: float
+  exposure_frequency:
+    description: The frequency of the exposure.
+    range: ExposureFrequencyEnum
+  exposure_concentration:
+    description: The concentration of the stimulus in the exposure.
+    range: float
+  exposure_medium:
+    description: The medium through which the exposure occurs.
+    range: ExposureMediumEnum
+
+  treatment:
+    description: The treatment administered in an experimental exposure.
+    range: uriorcurie
+  experimental_subject:
+    description: The subject of the experimental exposure.
+    range: uriorcurie
+  experimental_result:
+    description: The result of the experimental exposure.
+    range: uriorcurie
 
 enums:
-  PersonStatus:
+  ExposureRouteEnum:
     permissible_values:
-      ALIVE:
-        description: the person is living
-        meaning: PATO:0001421
-      DEAD:
-        description: the person is deceased
-        meaning: PATO:0001422
-      UNKNOWN:
-        description: the vital status is not known
-        todos:
-          - map this to an ontology
+      Dermal:
+        description: Exposure via the skin.
+      Oral:
+        description: Exposure via ingestion.
+      Inhalation:
+        description: Exposure via breathing.
+      Injection:
+        description: Exposure via injection.
+
+  ExposureFrequencyEnum:
+    permissible_values:
+      Continuous:
+        description: Exposure is continuous over the duration.
+      Intermittent:
+        description: Exposure occurs at intervals.
+      Single:
+        description: A single exposure event.
+
+  ExposureMediumEnum:
+    permissible_values:
+      Water:
+        description: Exposure medium is water.
+      Air:
+        description: Exposure medium is air.
+      Soil:
+        description: Exposure medium is soil.
+      Food:
+        description: Exposure medium is food.
