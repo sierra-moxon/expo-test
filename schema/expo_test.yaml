@@ -1,0 +1,720 @@
+name: expo-test
+description: 'A tiny LinkML schema for aligning exposure data around three parts:
+
+  stimulus, receiver, and outcome.'
+title: expo-test
+see_also:
+- https://sierra-moxon.github.io/expo-test
+id: https://w3id.org/sierra-moxon/expo-test
+imports:
+- linkml:types
+license: MIT
+prefixes:
+  expo_test:
+    prefix_prefix: expo_test
+    prefix_reference: https://w3id.org/sierra-moxon/expo-test/
+  linkml:
+    prefix_prefix: linkml
+    prefix_reference: https://w3id.org/linkml/
+  biolink:
+    prefix_prefix: biolink
+    prefix_reference: https://w3id.org/biolink/
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  ExO:
+    prefix_prefix: ExO
+    prefix_reference: http://purl.obolibrary.org/obo/ExO_
+  XCO:
+    prefix_prefix: XCO
+    prefix_reference: http://purl.obolibrary.org/obo/XCO_
+  CHEBI:
+    prefix_prefix: CHEBI
+    prefix_reference: http://purl.obolibrary.org/obo/CHEBI_
+  NCBITaxon:
+    prefix_prefix: NCBITaxon
+    prefix_reference: http://purl.obolibrary.org/obo/NCBITaxon_
+  ZP:
+    prefix_prefix: ZP
+    prefix_reference: http://purl.obolibrary.org/obo/ZP_
+  example:
+    prefix_prefix: example
+    prefix_reference: https://example.org/
+default_prefix: expo_test
+default_range: string
+types:
+  string:
+    name: string
+    definition_uri: https://w3id.org/linkml/String
+    description: A character string
+    notes:
+    - In RDF serializations, a slot with range of string is treated as a literal or
+      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
+      referenced with the lower case "string".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Text
+    base: str
+    uri: xsd:string
+  integer:
+    name: integer
+    definition_uri: https://w3id.org/linkml/Integer
+    description: An integer
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "integer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Integer
+    base: int
+    uri: xsd:integer
+  boolean:
+    name: boolean
+    definition_uri: https://w3id.org/linkml/Boolean
+    description: A binary (true or false) value
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "boolean".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Boolean
+    base: Bool
+    uri: xsd:boolean
+    repr: bool
+  float:
+    name: float
+    definition_uri: https://w3id.org/linkml/Float
+    description: A real number that conforms to the xsd:float specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "float".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:float
+  double:
+    name: double
+    definition_uri: https://w3id.org/linkml/Double
+    description: A real number that conforms to the xsd:double specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "double".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:double
+  decimal:
+    name: decimal
+    definition_uri: https://w3id.org/linkml/Decimal
+    description: A real number with arbitrary precision that conforms to the xsd:decimal
+      specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "decimal".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    broad_mappings:
+    - schema:Number
+    base: Decimal
+    uri: xsd:decimal
+  time:
+    name: time
+    definition_uri: https://w3id.org/linkml/Time
+    description: A time object represents a (local) time of day, independent of any
+      particular day
+    notes:
+    - URI is dateTime because OWL reasoners do not work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "time".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Time
+    base: XSDTime
+    uri: xsd:time
+    repr: str
+  date:
+    name: date
+    definition_uri: https://w3id.org/linkml/Date
+    description: a date (year, month and day) in an idealized calendar
+    notes:
+    - URI is dateTime because OWL reasoners don't work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Date
+    base: XSDDate
+    uri: xsd:date
+    repr: str
+  datetime:
+    name: datetime
+    definition_uri: https://w3id.org/linkml/Datetime
+    description: The combination of a date and time
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:DateTime
+    base: XSDDateTime
+    uri: xsd:dateTime
+    repr: str
+  date_or_datetime:
+    name: date_or_datetime
+    definition_uri: https://w3id.org/linkml/DateOrDatetime
+    description: Either a date or a datetime
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date_or_datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: linkml:DateOrDatetime
+    repr: str
+  uriorcurie:
+    name: uriorcurie
+    definition_uri: https://w3id.org/linkml/Uriorcurie
+    description: a URI or a CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uriorcurie".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: URIorCURIE
+    uri: xsd:anyURI
+    repr: str
+  curie:
+    name: curie
+    definition_uri: https://w3id.org/linkml/Curie
+    conforms_to: https://www.w3.org/TR/curie/
+    description: a compact URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "curie".
+    comments:
+    - in RDF serializations this MUST be expanded to a URI
+    - in non-RDF serializations MAY be serialized as the compact representation
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: Curie
+    uri: xsd:string
+    repr: str
+  uri:
+    name: uri
+    definition_uri: https://w3id.org/linkml/Uri
+    conforms_to: https://www.ietf.org/rfc/rfc3987.txt
+    description: a complete URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uri".
+    comments:
+    - in RDF serializations a slot with range of uri is treated as a literal or type
+      xsd:anyURI unless it is an identifier or a reference to an identifier, in which
+      case it is translated directly to a node
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:URL
+    base: URI
+    uri: xsd:anyURI
+    repr: str
+  ncname:
+    name: ncname
+    definition_uri: https://w3id.org/linkml/Ncname
+    description: Prefix part of CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "ncname".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NCName
+    uri: xsd:string
+    repr: str
+  objectidentifier:
+    name: objectidentifier
+    definition_uri: https://w3id.org/linkml/Objectidentifier
+    description: A URI or CURIE that represents an object in the model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "objectidentifier".
+    comments:
+    - Used for inheritance and type checking
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: ElementIdentifier
+    uri: shex:iri
+    repr: str
+  nodeidentifier:
+    name: nodeidentifier
+    definition_uri: https://w3id.org/linkml/Nodeidentifier
+    description: A URI, CURIE or BNODE that represents a node in a model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "nodeidentifier".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NodeIdentifier
+    uri: shex:nonLiteral
+    repr: str
+  jsonpointer:
+    name: jsonpointer
+    definition_uri: https://w3id.org/linkml/Jsonpointer
+    conforms_to: https://datatracker.ietf.org/doc/html/rfc6901
+    description: A string encoding a JSON Pointer. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to a valid object within the current
+      instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpointer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  jsonpath:
+    name: jsonpath
+    definition_uri: https://w3id.org/linkml/Jsonpath
+    conforms_to: https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html
+    description: A string encoding a JSON Path. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to zero or more valid objects within
+      the current instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  sparqlpath:
+    name: sparqlpath
+    definition_uri: https://w3id.org/linkml/Sparqlpath
+    conforms_to: https://www.w3.org/TR/sparql11-query/#propertypaths
+    description: A string encoding a SPARQL Property Path. The value of the string
+      MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects
+      within the current instance document when encoded as RDF.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "sparqlpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+enums:
+  ExposureRouteEnum:
+    name: ExposureRouteEnum
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExposureRouteEnum
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    permissible_values:
+      Dermal:
+        text: Dermal
+        description: Exposure via the skin.
+      Oral:
+        text: Oral
+        description: Exposure via ingestion.
+      Inhalation:
+        text: Inhalation
+        description: Exposure via breathing.
+      Injection:
+        text: Injection
+        description: Exposure via injection.
+  ExposureFrequencyEnum:
+    name: ExposureFrequencyEnum
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExposureFrequencyEnum
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    permissible_values:
+      Continuous:
+        text: Continuous
+        description: Exposure is continuous over the duration.
+      Intermittent:
+        text: Intermittent
+        description: Exposure occurs at intervals.
+      Single:
+        text: Single
+        description: A single exposure event.
+  ExposureMediumEnum:
+    name: ExposureMediumEnum
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExposureMediumEnum
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    permissible_values:
+      Water:
+        text: Water
+        description: Exposure medium is water.
+      Air:
+        text: Air
+        description: Exposure medium is air.
+      Soil:
+        text: Soil
+        description: Exposure medium is soil.
+      Food:
+        text: Food
+        description: Exposure medium is food.
+slots:
+  id:
+    name: id
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/id
+    description: A unique identifier for a thing
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - schema:identifier
+    slot_uri: schema:identifier
+    identifier: true
+    owner: ExperimentalExposure
+    domain_of:
+    - NamedThing
+    - ExperimentalExposure
+    range: uriorcurie
+    required: true
+  name:
+    name: name
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/name
+    description: A human-readable name for a thing
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - schema:name
+    slot_uri: schema:name
+    owner: NamedThing
+    domain_of:
+    - NamedThing
+    range: string
+  description:
+    name: description
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/description
+    description: A human-readable description for a thing
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - schema:description
+    slot_uri: schema:description
+    owner: NamedThing
+    domain_of:
+    - NamedThing
+    range: string
+  exposure_stimulus:
+    name: exposure_stimulus
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_stimulus
+    description: The stimulus entity involved in the exposure event.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_stimulus
+    owner: ExposureEvent
+    domain_of:
+    - ExposureEvent
+    range: StimulusEntity
+  exposure_outcome:
+    name: exposure_outcome
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_outcome
+    description: The biological response resulting from the exposure event.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_outcome
+    owner: ExposureEvent
+    domain_of:
+    - ExposureEvent
+    range: BiologicalResponse
+  exposure_receiver:
+    name: exposure_receiver
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_receiver
+    description: The biological entity that receives the exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_receiver
+    owner: ExposureEvent
+    domain_of:
+    - ExposureEvent
+    range: BiologicalEntity
+  exposure_route:
+    name: exposure_route
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_route
+    description: The route by which the exposure occurs.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_route
+    owner: ExperimentalExposure
+    domain_of:
+    - Exposure
+    - ExperimentalExposure
+    range: ExposureRouteEnum
+  exposure_duration:
+    name: exposure_duration
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_duration
+    description: The duration of the exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_duration
+    owner: ExperimentalExposure
+    domain_of:
+    - Exposure
+    - ExperimentalExposure
+    range: float
+  exposure_frequency:
+    name: exposure_frequency
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_frequency
+    description: The frequency of the exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_frequency
+    owner: ExperimentalExposure
+    domain_of:
+    - Exposure
+    - ExperimentalExposure
+    range: ExposureFrequencyEnum
+  exposure_concentration:
+    name: exposure_concentration
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_concentration
+    description: The concentration of the stimulus in the exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_concentration
+    owner: ExperimentalExposure
+    domain_of:
+    - Exposure
+    - ExperimentalExposure
+    range: float
+  exposure_medium:
+    name: exposure_medium
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/exposure_medium
+    description: The medium through which the exposure occurs.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposure_medium
+    owner: ExperimentalExposure
+    domain_of:
+    - Exposure
+    - ExperimentalExposure
+    range: ExposureMediumEnum
+  treatment:
+    name: treatment
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/treatment
+    description: The treatment administered in an experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:treatment
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    range: uriorcurie
+  experimental_subject:
+    name: experimental_subject
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/experimental_subject
+    description: The subject of the experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:experimental_subject
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    range: uriorcurie
+  experimental_result:
+    name: experimental_result
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/experimental_result
+    description: The result of the experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:experimental_result
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    range: uriorcurie
+  exposureCollection__exposures:
+    name: exposureCollection__exposures
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slot_uri: expo_test:exposures
+    alias: exposures
+    owner: ExposureCollection
+    domain_of:
+    - ExposureCollection
+    range: ExperimentalExposure
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  ExperimentalExposure_treatment:
+    name: ExperimentalExposure_treatment
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/treatment
+    instantiates:
+    - exposure_stimulus
+    description: The treatment administered in an experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: treatment
+    domain: ExperimentalExposure
+    slot_uri: expo_test:treatment
+    alias: treatment
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    is_usage_slot: true
+    usage_slot_name: treatment
+    range: uriorcurie
+  ExperimentalExposure_experimental_subject:
+    name: ExperimentalExposure_experimental_subject
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/experimental_subject
+    instantiates:
+    - exposure_receiver
+    description: The subject of the experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: experimental_subject
+    domain: ExperimentalExposure
+    slot_uri: expo_test:experimental_subject
+    alias: experimental_subject
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    is_usage_slot: true
+    usage_slot_name: experimental_subject
+    range: uriorcurie
+  ExperimentalExposure_experimental_result:
+    name: ExperimentalExposure_experimental_result
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/experimental_result
+    instantiates:
+    - exposure_outcome
+    description: The result of the experimental exposure.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: experimental_result
+    domain: ExperimentalExposure
+    slot_uri: expo_test:experimental_result
+    alias: experimental_result
+    owner: ExperimentalExposure
+    domain_of:
+    - ExperimentalExposure
+    is_usage_slot: true
+    usage_slot_name: experimental_result
+    range: uriorcurie
+classes:
+  NamedThing:
+    name: NamedThing
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/NamedThing
+    description: A generic grouping for any identifiable entity
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - schema:Thing
+    slots:
+    - id
+    - name
+    - description
+    class_uri: schema:Thing
+  ExposureEvent:
+    name: ExposureEvent
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExposureEvent
+    annotations:
+      must_not_have_id_slot:
+        tag: must_not_have_id_slot
+        value: true
+    description: An event in which a BiologicalEntity is exposed to a StimulusEntity
+      and results in a BiologicalResponse
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    abstract: true
+    slots:
+    - exposure_stimulus
+    - exposure_outcome
+    - exposure_receiver
+    class_uri: expo_test:ExposureEvent
+  StimulusEntity:
+    name: StimulusEntity
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/StimulusEntity
+    description: 'An entity that can act as a stimulus in an exposure event. Examples:
+      Chemical, Behavior, Diet, ManufacturedProduct, EnvironmentalProcess.'
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: NamedThing
+    abstract: true
+    slots:
+    - id
+    - name
+    - description
+    class_uri: expo_test:StimulusEntity
+  BiologicalResponse:
+    name: BiologicalResponse
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/BiologicalResponse
+    description: 'A biological outcome resulting from an exposure event. Examples:
+      Phenotype, Disease, AdverseOutcome, MolecularInitiatingEvent, KeyEvent.'
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: NamedThing
+    abstract: true
+    slots:
+    - id
+    - name
+    - description
+    class_uri: expo_test:BiologicalResponse
+  BiologicalEntity:
+    name: BiologicalEntity
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/BiologicalEntity
+    description: 'A biological entity that can receive an exposure. Examples: Gene,
+      Protein, Cell, AnatomicalEntity, Organism, Population.'
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    is_a: NamedThing
+    abstract: true
+    slots:
+    - id
+    - name
+    - description
+    class_uri: expo_test:BiologicalEntity
+  Exposure:
+    name: Exposure
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/Exposure
+    implements:
+    - ExposureEvent
+    description: External, non-genetic, and internal stimuli, that can be chemical,
+      physical, biological, and psychosocial in nature, that a BiologicalEntity interacts
+      with.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - ExO:0000002
+    abstract: true
+    slots:
+    - exposure_route
+    - exposure_duration
+    - exposure_frequency
+    - exposure_concentration
+    - exposure_medium
+    class_uri: ExO:0000002
+  ExperimentalExposure:
+    name: ExperimentalExposure
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExperimentalExposure
+    description: Exposure to a treatment in an empirical experimental setting.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    mappings:
+    - XCO:0000000
+    is_a: Exposure
+    slots:
+    - id
+    - ExperimentalExposure_treatment
+    - ExperimentalExposure_experimental_subject
+    - ExperimentalExposure_experimental_result
+    - exposure_route
+    - exposure_duration
+    - exposure_frequency
+    - exposure_concentration
+    - exposure_medium
+    slot_usage:
+      treatment:
+        name: treatment
+        instantiates:
+        - exposure_stimulus
+      experimental_subject:
+        name: experimental_subject
+        instantiates:
+        - exposure_receiver
+      experimental_result:
+        name: experimental_result
+        instantiates:
+        - exposure_outcome
+    class_uri: XCO:0000000
+  ExposureCollection:
+    name: ExposureCollection
+    definition_uri: https://w3id.org/sierra-moxon/expo-test/ExposureCollection
+    description: A holder for ExperimentalExposure objects.
+    from_schema: https://w3id.org/sierra-moxon/expo-test
+    slots:
+    - exposureCollection__exposures
+    attributes:
+      exposures:
+        name: exposures
+        range: ExperimentalExposure
+        multivalued: true
+        inlined_as_list: true
+    class_uri: expo_test:ExposureCollection
+    tree_root: true
+metamodel_version: 1.7.0
+source_file: expo_test.yaml
+source_file_date: '2026-04-23T20:52:50'
+source_file_size: 5578
+generation_date: '2026-04-23T20:53:02'
+
